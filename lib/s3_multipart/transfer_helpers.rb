@@ -62,7 +62,7 @@ module S3Multipart
     end
 
     def unique_name(options)
-      url = [UUID.generate, options[:object_name]].join("/")
+      url = [controller.model.to_s.pluralize, UUID.generate, options[:object_name]].join("/")
       controller = S3Multipart::Uploader.deserialize(options[:uploader])
 
       if controller.mount_point && defined?(CarrierWaveDirect)
