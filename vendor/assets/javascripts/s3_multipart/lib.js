@@ -130,7 +130,7 @@ function S3MP(options) {
           done = upload.uploaded;
 
           _.each(upload.inprogress,function(val) {
-            done += val;
+            if(val !== undefined) done += val;
           });
 
           percent = done/size * 100;
