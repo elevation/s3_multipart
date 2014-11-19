@@ -104,7 +104,7 @@ function S3MP(options) {
         // Notify the client that the upload has succeeded when we
         // get confirmation from the server
         if (obj.location) {
-          S3MP.onComplete(uploadObj);
+          obj.extra_data ? S3MP.onComplete(uploadObj) : S3MP.onComplete(uploadObj, obj.extra_data);
         }
       });
 
