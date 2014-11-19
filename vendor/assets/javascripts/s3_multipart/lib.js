@@ -54,7 +54,7 @@ function S3MP(options) {
 
     // called when an upload is paused or the network connection cuts out
     onError: function(uploadObj, part) {
-      // To-do
+      S3MP.onError(uploadObj, part);
     },
 
     // called when a single part has successfully uploaded
