@@ -129,9 +129,12 @@ function S3MP(options) {
           size = upload.size;
           done = upload.uploaded;
 
-          _.each(upload.inprogress,function(val) {
-            if(val !== undefined) done += val;
-          });
+          _.each(upload.inprogress,function(val, index) {
+            part_available = _.find(upload.parts, function(part){
+              return part.num == index
+            })
+            if(part_available && val !== undefined) done += val;
+          })
 
           percent = done/size * 100;
           speed = done - last_upload_chunk[key];
