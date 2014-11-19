@@ -134,7 +134,7 @@ function S3MP(options) {
               return part.num == index
             })
             if(part_available && val !== undefined) done += val;
-          })
+          });
 
           percent = done/size * 100;
           speed = done - last_upload_chunk[key];
@@ -313,7 +313,7 @@ S3MP.prototype.cancel = function(key) {
   i = _.indexOf(this.uploadList, uploadObj);
 
   this.uploadList.splice(i,i+1);
-  this.onCancel();
+  this.onCancel(key);
 };
 
 // pause a given file upload
@@ -326,7 +326,7 @@ S3MP.prototype.pause = function(key) {
     }
   });
 
-  this.onPause();
+  this.onPause(key);
 };
 
 // resume a given file upload
@@ -339,7 +339,7 @@ S3MP.prototype.resume = function(key) {
     }
   });
 
-  this.onResume();          
+  this.onResume(key);
 };
 
 // Upload constructor
