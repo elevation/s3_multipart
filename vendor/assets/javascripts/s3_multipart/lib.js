@@ -314,6 +314,7 @@ S3MP.prototype.cancel = function(key) {
 
   this.uploadList.splice(i,i+1);
   this.onCancel(key);
+  this.handler.clearProgressTimer(key);
 };
 
 // pause a given file upload
@@ -327,6 +328,7 @@ S3MP.prototype.pause = function(key) {
   });
 
   this.onPause(key);
+  this.handler.clearProgressTimer(key);
 };
 
 // resume a given file upload
@@ -338,7 +340,7 @@ S3MP.prototype.resume = function(key) {
       part.activate();
     }
   });
-
+  this.handler.startProgressTimer(key);
   this.onResume(key);
 };
 
@@ -362,10 +364,10 @@ function Upload(file, o, key) {
     // Break the file into an appropriate amount of chunks
     // This needs to be optimized for various browsers types/versions
     if (this.size > 1000000000) { // size greater than 1gb
-      num_segs = 45;
+      num_segs = 200;
       pipes = 2;
     } else if (this.size > 500000000) { // greater than 500mb
-      num_segs = 40;
+      num_segs = 140;
       pipes = 2;
     } else if (this.size > 100000000) { // greater than 100 mb
       num_segs = 20;
