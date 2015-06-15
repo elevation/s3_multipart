@@ -435,7 +435,11 @@ function UploadPart(blob, key, upload) {
 
   this.xhr = xhr = upload.createXhrRequest();
   xhr.onload = function() {
-    upload.handler.onPartSuccess(upload, part);
+    if (part.xhr.getResponseHeader("ETag") === null) {
+      upload.handler.onError(upload, part);
+    } else {
+      upload.handler.onPartSuccess(upload, part);
+    }
   };
   xhr.onerror = function() {
     upload.handler.onError(upload, part);
