@@ -362,11 +362,11 @@ function Upload(file, o, key) {
     // Break the file into an appropriate amount of chunks
     // This needs to be optimized for various browsers types/versions
     if (this.size > 1000000000) { // size greater than 1gb
-      num_segs = 100;
-      pipes = 10;
-    } else if (this.size > 500000000) { // greater than 500mb
-      num_segs = 50;
+      num_segs = 200;
       pipes = 5;
+    } else if (this.size > 500000000) { // greater than 500mb
+      num_segs = 100;
+      pipes = 3;
     } else if (this.size > 100000000) { // greater than 100 mb
       num_segs = 20;
       pipes = 5;
