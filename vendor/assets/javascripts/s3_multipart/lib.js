@@ -360,19 +360,19 @@ function Upload(file, o, key) {
     // This needs to be optimized for various browsers types/versions
     if (this.size > 1000000000) { // size greater than 1gb
       num_segs = 200;
-      pipes = 2;
+      pipes = 5;
     } else if (this.size > 500000000) { // greater than 500mb
-      num_segs = 140;
-      pipes = 2;
+      num_segs = 50;
+      pipes = 5;
     } else if (this.size > 100000000) { // greater than 100 mb
-      num_segs = 20;
+      num_segs = 16;
       pipes = 5;
     } else if (this.size > 50000000) { // greater than 50 mb
       num_segs = 5;
       pipes = 2;
     } else if (this.size > 10000000) { // greater than 10 mb
-      num_segs = 2;
-      pipes = 2;
+      num_segs = 1;
+      pipes = 1;
     } else { // greater than 5 mb (S3 does not allow multipart uploads < 5 mb)
       num_segs = 1;
       pipes = 1;
