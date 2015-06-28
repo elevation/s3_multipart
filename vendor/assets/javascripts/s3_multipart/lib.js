@@ -358,9 +358,12 @@ function Upload(file, o, key) {
 
     // Break the file into an appropriate amount of chunks
     // This needs to be optimized for various browsers types/versions
-    if (this.size > 1000000000) { // size greater than 1gb
+    if (this.size > 2000000000) { // size greater than 2gb
       num_segs = 200;
-      pipes = 5;
+      pipes = 10;
+    } else if (this.size > 1000000000) { // size greater than 1gb
+      num_segs = 200;
+      pipes = 7;
     } else if (this.size > 500000000) { // greater than 500mb
       num_segs = 50;
       pipes = 5;
@@ -376,7 +379,7 @@ function Upload(file, o, key) {
     } else { // greater than 5 mb (S3 does not allow multipart uploads < 5 mb)
       num_segs = 1;
       pipes = 1;
-    }  
+    }
 
     chunk_segs = _.range(num_segs + 1);
     chunk_lens = _.map(chunk_segs, function(seg) {
