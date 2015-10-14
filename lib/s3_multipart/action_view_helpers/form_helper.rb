@@ -5,9 +5,12 @@ module S3Multipart
         uploader_digest = S3Multipart::Uploader.serialize(options[:uploader])
         html = file_field_tag options[:input_name], :accept => options[:types].join(','), :multiple => 'multiple', :data => {:uploader => uploader_digest}
         html << options[:html].html_safe
-        html << button_tag(:class => options[:button_class]) do
-          content_tag(:span, options[:button_text])
+        if options[:button_text].present?
+          html << button_tag(:class => options[:button_class]) do
+            content_tag(:span, options[:button_text])
+          end
         end
+        html
       end
     end
   end
