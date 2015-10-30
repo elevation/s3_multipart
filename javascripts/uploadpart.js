@@ -25,7 +25,7 @@ function UploadPart(blob, key, upload) {
 };
 
 UploadPart.prototype.activate = function() { 
-  this.xhr.open('PUT', 'http://'+this.upload.bucket+'.s3.amazonaws.com/'+this.upload.object_name+'?partNumber='+this.num+'&uploadId='+this.upload.upload_id, true);
+  upload_part.xhr.open('PUT', '//s3.amazonaws.com/'+upload_part.upload.bucket+'/'+upload_part.upload.object_name+'?partNumber='+upload_part.num+'&uploadId='+upload_part.upload.upload_id, true);
   this.xhr.setRequestHeader('x-amz-date', this.date);
   this.xhr.setRequestHeader('Authorization', this.auth);
 

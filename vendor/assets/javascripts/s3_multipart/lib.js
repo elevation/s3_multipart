@@ -456,8 +456,7 @@ function UploadPart(blob, key, upload) {
 UploadPart.prototype.activate = function() {
   var upload_part = this;
   this.upload.signPartRequest(this.upload.id, this.upload.object_name, this.upload.upload_id, this, function(response) {
-    upload_part.xhr.open('PUT', '//'+upload_part.upload.bucket+'.s3.amazonaws.com/'+upload_part.upload.object_name+'?partNumber='+upload_part.num+'&uploadId='+upload_part.upload.upload_id, true);
-
+    upload_part.xhr.open('PUT', '//s3.amazonaws.com/'+upload_part.upload.bucket+'/'+upload_part.upload.object_name+'?partNumber='+upload_part.num+'&uploadId='+upload_part.upload.upload_id, true);
     upload_part.xhr.setRequestHeader('x-amz-date', response.date);
     upload_part.xhr.setRequestHeader('Authorization', response.authorization);
 
